@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thruebab Greetings</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇹</text></svg>">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tibetan&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Social Media Sharing Meta Tags -->
+    <meta property="og:title" content="Happy Blessed Rainy Day - Thruebab">
+    <meta property="og:description" content="Thruebab Nim Lu Tashi Delek - Wishing you by Pema Drakpa">
+    <meta property="og:image" content="https://raw.githubusercontent.com/pema-cr7/thruebab_wish/main/bhutan-flag-background.jpg">
+    <meta property="og:url" content="https://pema-cr7.github.io/thruebab_wish/">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+        }
+        
+        /* Background Layers */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .photo-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            filter: brightness(0.8) sepia(0.3) hue-rotate(10deg);
+        }
+        
+        .flag-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 103, 31, 0.6) 0%, rgba(255, 205, 0, 0.6) 100%);
+            mix-blend-mode: multiply;
+        }
+        
+        .content-container {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-width: 650px;
+            width: 90%;
+            z-index: 2;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #ff671f;
+            margin: 0.5em 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: #ff671f;
+            margin: 0.5em 0;
+            font-family: 'Noto Serif Tibetan', serif;
+            font-weight: 600;
+        }
+        
+        .date {
+            font-size: 1.6rem;
+            color: white;
+            background: linear-gradient(135deg, #ff671f, #ffcd00);
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 20px 0;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 103, 31, 0.4);
+        }
+        
+        p {
+            font-size: 1.3rem;
+            color: #333;
+            margin-top: 1em;
+            font-style: italic;
+        }
+        
+        .body-washing-text {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 205, 0, 0.9);
+            color: #ff671f;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            transform: rotate(-5deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            border: 3px dashed #ff671f;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(-5deg) translateY(-10px); }
+        }
+        
+        .share-buttons {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .share-buttons a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .share-buttons a i {
+            font-size: 1.3rem;
+        }
+        
+        .whatsapp { background: #25D366; }
+        .whatsapp:hover { background: #128C7E; transform: translateY(-3px); }
+        
+        .telegram { background: #0088cc; }
+        .telegram:hover { background: #006699; transform: translateY(-3px); }
+        
+        .email { background: #EA4335; }
+        .email:hover { background: #D14836; transform: translateY(-3px); }
+        
+        .facebook { background: #3b5998; }
+        .facebook:hover { background: #2d4373; transform: translateY(-3px); }
+        
+        .messenger { background: #006AFF; }
+        .messenger:hover { background: #0051CC; transform: translateY(-3px); }
+        
+        .twitter { background: #1DA1F2; }
+        .twitter:hover { background: #0d8bd9; transform: translateY(-3px); }
+        
+        .snapchat { background: #FFFC00; color: #000 !important; }
+        .snapchat:hover { background: #e6e600; transform: translateY(-3px); }
+        
+        /* Raindrops animation */
+        .rain-drop {
+            position: absolute;
+            width: 3px;
+            height: 15px;
+            background: rgba(255,255,255,0.8);
+            animation: fall linear infinite;
+            top: -20px;
+            z-index: -1;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+        
+        @keyframes fall {
+            0% { transform: translate(0,0) rotate(15deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translate(30px, 100vh) rotate(15deg); opacity: 0; }
+        }
+        
+        /* Dragon Icon */
+        .dragon-icon {
+            font-size: 4rem;
+            margin: 20px 0;
+            color: #ff671f;
+            animation: pulse 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Photo Frame */
+        .photo-frame {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid #ffcd00;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: #ff671f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; }
+            .date { font-size: 1.3rem; }
+            .body-washing-text { font-size: 1.2rem; padding: 12px 20px; }
+            .share-buttons { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 480px) {
+            .content-container { padding: 25px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            .share-buttons { grid-template-columns: 1fr; }
+            .body-washing-text { 
+                position: relative; 
+                bottom: auto; 
+                right: auto; 
+                margin-top: 20px;
+                transform: rotate(0);
+                animation: none;
+            }
+        }
+    </style>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Layers -->
+    <div class="background-container">
+        <div class="photo-background"></div>
+        <div class="flag-overlay"></div>
+    </div>
+    
+    <!-- "Happy Body Washing Day" Text -->
+    <div class="body-washing-text">
+        Happy Body Washing Day! 🚿
+    </div>
+    
+    <!-- Main Content -->
+    <div class="content-container">
+        <div class="photo-frame">
+            <i class="fas fa-user"></i>
+        </div>
+        
+        <div class="dragon-icon">🐉</div>
+        
+        <h1>HAPPY BLESSED RAINY DAY</h1>
+        <h2>THRUEBAB NIM LU TASHI DELEK</h2>
+        
+        <div class="date">23/09/2025</div>
+        
+        <p>~ Wishing you by: <strong>Pema Drakpa</strong></p>
+        
+        <div class="share-buttons">
+            <a href="https://api.whatsapp.com/send?text=HAPPY%20BLESSED%20RAINY%20DAY%20-%20THRUEBAB%20NIM%20LU%20TASHI%20DELEK%20%7C%2023%2F09%2F2025%20~%20From%20Pema%20Drakpa%20%0Ahttps%3A%2F%2Fpema-cr7.github.io%2Fthruebab_wish%2F" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            
+            <a href="https://t.me/share/url?url=https://pema-cr7.github.io/thruebab_wish/&text=HAPPY%20BLESSED%20RAINY%20DAY%20-%20THRUEBAB%20NIM%20LU%20TASHI%20DELEK%20%7C%2023/09/2025%20~%20From%20Pema%20Drakpa" target="_blank" class="telegram">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+            
+            <a href="mailto:?subject=Thruebab%20Greetings%20-%2023/09/2025&body=HAPPY%20BLESSED%20RAINY%20DAY%20-%20THRUEBAB%20NIM%20LU%20TASHI%20DELEK%0A%0ADate%3A%2023%2F09%2F2025%0A%0AWishing%20you%20by%3A%20Pema%20Drakpa%0A%0AVisit%3A%20https%3A%2F%2Fpema-cr7.github.io%2Fthruebab_wish%2F" target="_blank" class="email">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+            
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://pema-cr7.github.io/thruebab_wish/&quote=HAPPY%20BLESSED%20RAINY%20DAY%20-%20THRUEBAB%20NIM%20LU%20TASHI%20DELEK%20%7C%2023/09/2025%20~%20From%20Pema%20Drakpa" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            
+            <a href="fb-messenger://share/?link=https://pema-cr7.github.io/thruebab_wish/&app_id=123456789" target="_blank" class="messenger">
+                <i class="fab fa-facebook-messenger"></i> Messenger
+            </a>
+            
+            <a href="https://twitter.com/intent/tweet?text=HAPPY%20BLESSED%20RAINY%20DAY%20-%20THRUEBAB%20NIM%20LU%20TASHI%20DELEK%20%7C%2023%2F09%2F2025%20~%20From%20Pema%20Drakpa&url=https%3A%2F%2Fpema-cr7.github.io%2Fthruebab_wish%2F" target="_blank" class="twitter">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            
+            <a href="https://www.snapchat.com/scan?attachmentUrl=https://pema-cr7.github.io/thruebab_wish/" target="_blank" class="snapchat">
+                <i class="fab fa-snapchat-ghost"></i> Snapchat
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Create raindrops
+        const raindrops = [];
+        const numDrops = 100;
+        const wind = { x: 0 };
+        
+        for(let i = 0; i < numDrops; i++){
+            const drop = document.createElement('div');
+            drop.className = 'rain-drop';
+            drop.style.left = Math.random() * window.innerWidth + 'px';
+            drop.style.height = (10 + Math.random() * 20) + 'px';
+            drop.style.animationDuration = (0.8 + Math.random() * 2) + 's';
+            drop.style.animationDelay = Math.random() * 5 + 's';
+            drop.style.transform = `rotate(${10 + Math.random() * 20}deg)`;
+            drop.style.background = `rgba(255,255,255,${0.4 + Math.random() * 0.4})`;
+            document.body.appendChild(drop);
+            raindrops.push(drop);
+        }
+        
+        // Interactive wind effect
+        document.addEventListener('mousemove', e => {
+            const centerX = window.innerWidth / 2;
+            wind.x = (e.clientX - centerX) / 40;
+        });
+        
+        // Animate raindrops
+        function animate() {
+            raindrops.forEach(drop => {
+                const top = parseFloat(drop.style.top || 0) + 5;
+                const left = parseFloat(drop.style.left) + wind.x;
+                drop.style.top = (top > window.innerHeight ? -30 : top) + 'px';
+                drop.style.left = (left > window.innerWidth ? 0 : (left < 0 ? window.innerWidth : left)) + 'px';
+            });
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Add click effect to share buttons
+        document.querySelectorAll('.share-buttons a').forEach(button => {
+            button.addEventListener('click', function(e) {
+                this.style.transform = 'scale(0.95) translateY(0)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) translateY(0)';
+                }, 150);
+            });
+        });
+        
+        // Instructions for adding your photo
+        console.log("To add your photo: Replace the background-image URL in .photo-background with your photo URL");
+    </script>
+</body>
+</html>
